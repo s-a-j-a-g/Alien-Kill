@@ -2,11 +2,17 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QDebug>
+#include "Game.h"
 
-Enemy::Enemy()
+extern Game *game;
+
+Enemy::Enemy(QGraphicsPixmapItem *parent) : QObject(), QGraphicsPixmapItem(parent)
 {
     //creates a rectangle(enemy)
-    setRect(0, 0, 50, 50);
+    //setRect(0, 0, 50, 50);
+
+    //draw graphics
+    setPixmap(QPixmap(":/images/enemy.png"));
 
     //sets random position
     int random_number = rand() % 750;
@@ -23,10 +29,11 @@ void Enemy::move()
     //enemy moves down
     setPos(x(), y() + 5);
 
-    if(pos().y() > 600) //here rect().height()  50 //when the top part of an enemy passes the scene, memory is freed
+    if(pos().y() > 800) //here rect().height()  50 //when the top part of an enemy passes the scene, memory is freed //and health is reduced
     {
         scene()->removeItem(this);
         delete this;
-        qDebug() << "DELETED!!!!!!";
+
+        game->health->decrease();
     }
 }

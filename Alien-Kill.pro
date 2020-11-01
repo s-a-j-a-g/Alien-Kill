@@ -1,4 +1,5 @@
-QT       += core gui
+QT       += core gui \
+            multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,15 +19,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     Bullet.cpp \
     Enemy.cpp \
-    MyRect.cpp \
+    Game.cpp \
+    Health.cpp \
+    Player.cpp \
+    Score.cpp \
     main.cpp
 
 HEADERS += \
     Bullet.h \
     Enemy.h \
-    MyRect.h
+    Game.h \
+    Health.h \
+    Player.h \
+    Score.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc
